@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd"
+	default-autowire="byName" default-lazy-init="true">
+	<bean id="productService" class="web.service.ProductService">
+		<property name="jdbcService" ref="jdbcService"></property>
+	</bean>
+	<bean id="lbService" class="web.service.LbService">
+		<property name="jdbcService" ref="jdbcService"></property>
+	</bean>
+	<bean id="menuService" class="common.service.MenuService">
+		<property name="jdbcService" ref="jdbcService" />
+		<property name="functionService" ref="functionService" />
+	</bean>
+
+	<bean id="functionService" class="common.service.FunctionService">
+		<property name="jdbcService" ref="jdbcService" />
+	</bean>
+
+	<bean id="userService" class="common.service.UserService">
+		<property name="jdbcService" ref="jdbcService"></property>
+		<property name="roleService" ref="roleService"></property>
+	</bean>
+	<bean id="roleService" class="common.service.RoleService">
+		<property name="jdbcService" ref="jdbcService"></property>
+	</bean>
+
+	<bean id="departmentService" class="common.service.DepartmentService">
+		<property name="jdbcService" ref="jdbcService"></property>
+	</bean>
+	<bean id="dictionaryService" class="common.service.DictionaryService">
+		<property name="jdbcService" ref="jdbcService"></property>
+	</bean>
+	<bean id="userManager" class="common.service.UserManager">
+		<property name="userService" ref="userService" />
+		<!-- <property name="menuService" ref="menuService" /> <property name="roleService" 
+			ref="roleService" /> <property name="functionService" ref="functionService" 
+			/> -->
+	</bean>
+	<!-- <bean id="sequenceService" class="service.SequenceService"> <property 
+		name="jdbcService" ref="jdbcService"></property> </bean> -->
+	<!-- 属性作用参照 https://mosquitto.org/man/mosquitto-conf-5.html -->
+	<bean id="publishServiceImpl" class="common.mosquitto.PublishServiceImpl">
+		<constructor-arg index="0">
+			<value>120.24.233.158</value>
+		</constructor-arg>
+		<constructor-arg index="1">
+			<value>sinobest_client_id</value>
+		</constructor-arg>
+		<constructor-arg index="2">
+			<value>true</value>
+		</constructor-arg>
+		<constructor-arg index="3">
+			<value>false</value>
+		</constructor-arg>
+		<constructor-arg index="4">
+			<value>liangzhenghui</value>
+		</constructor-arg>
+		<constructor-arg index="5">
+			<value>3109006380</value>
+		</constructor-arg>
+		<constructor-arg index="6">
+			<value>false</value>
+		</constructor-arg>
+	</bean>
+</beans>
