@@ -28,7 +28,7 @@ public class SslUtil
 	}
 	public static void init(){
 		try{
-			//local test
+			//local  test
 			final String caCrtFile="D:\\liangzhenghui\\fsl\\target\\classes\\ca.crt";
 			final String crtFile="D:\\liangzhenghui\\fsl\\target\\classes\\client.crt";
 		    final String keyFile="D:\\liangzhenghui\\fsl\\target\\classes\\client.key";
